@@ -1,0 +1,15 @@
+{
+  "name": "dongyang-food-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "client": "yarn workspace client dev",
+    "server": "yarn workspace server dev",
+    "start": "cd server && npm run serve"
+  }
+}
