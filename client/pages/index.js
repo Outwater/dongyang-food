@@ -16,7 +16,7 @@ export default function Home({ products }) {
 export const getStaticProps = async () => {
   const dev = process.env.NODE_ENV !== "production";
   const baseUrl = dev ? "http://localhost:1337" : process.env.NEXT_PUBLIC_STRAPI_API_URL;
-  console.log(baseUrl);
+
   const res = await fetch(`${baseUrl}/api/products?populate=*`);
   const productsRes = await res.json();
 
