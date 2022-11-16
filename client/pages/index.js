@@ -12,12 +12,11 @@ export default function Home({ products }) {
     </div>
   );
 }
+const dev = process.env.NODE_ENV !== "production";
+const baseUrl = dev ? "http://localhost:1337" : process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
 export const getStaticProps = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}api/products?populate=*` ||
-      `http://localhost:1337/api/products?populate=*`
-  );
+  const res = await fetch(`${baseUrl}/api/products?populate=*`);
   const productsRes = await res.json();
 
   return {
