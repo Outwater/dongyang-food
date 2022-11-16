@@ -14,7 +14,10 @@ export default function Home({ products }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:1338/api/products?populate=*");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}api/products?populate=*` ||
+      `http://localhost:1337/api/products?populate=*`
+  );
   const productsRes = await res.json();
 
   return {
