@@ -11,8 +11,6 @@
   "scripts": {
     "client": "yarn workspace client dev",
     "server": "yarn workspace server dev",
-    "start": "cd server && yarn start",
-    "build": "cd server && strapi build",
-    "strapi": "cd server && strapi"
+    "build": "cd server && strapi build"
   }
 }
