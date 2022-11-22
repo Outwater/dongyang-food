@@ -1,35 +1,31 @@
-import styled from "@emotion/styled";
+import request from "../lib/request";
+import Seo from "../components/seo";
+import ProductList from "../components/ProductList";
 
-export default function Home({ products }) {
+const Home = ({ products, homepage }) => {
   return (
     <div>
       <h1>Home페이지</h1>
-      <div>
-        {products?.map((product) => {
-          return <Card key={product.attributes.title}> {product.attributes.title}</Card>;
-        })}
-      </div>
+      <Seo seo={homepage.attributes.seo} />
+      <ProductList products={products} />
     </div>
   );
-}
+};
 
 export const getStaticProps = async () => {
-  const dev = process.env.NODE_ENV !== "production";
-  const baseUrl = dev ? "http://localhost:1337" : process.env.NEXT_PUBLIC_STRAPI_API_URL;
-
-  const res = await fetch(`${baseUrl}/api/products?populate=*`);
-  const productsRes = await res.json();
+  const { data: products } = await request(`/products?populate=*`);
+  const { data: homepage } = await request(`/home-page`, {
+    populate: {
+      seo: { populate: "*" },
+    },
+  });
 
   return {
     props: {
-      products: productsRes.data,
+      products,
+      homepage,
     },
   };
 };
 
-const Card = styled.div({
-  margin: "10px auto",
-  width: "300px",
-  height: "300px",
-  background: "#EEEEEE",
-});
+export default Home;
