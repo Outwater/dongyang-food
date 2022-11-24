@@ -1,14 +1,15 @@
 import request from "../lib/request";
+import Layout from "../components/layout";
 import Seo from "../components/seo";
 import ProductList from "../components/ProductList";
 
 const Home = ({ products, homepage }) => {
   return (
-    <div>
+    <Layout>
       <h1>Home페이지</h1>
       <Seo seo={homepage.attributes.seo} />
       <ProductList products={products} />
-    </div>
+    </Layout>
   );
 };
 
