@@ -2,28 +2,31 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+const navItems = [
+  { path: "/", label: "상품 목록" },
+  { path: "/price", label: "가격표 보기" },
+  { path: "/admin", label: "관리자 페이지" },
+];
+
 const Nav = () => {
   const { pathname: currentPath } = useRouter();
-  const isActive = (path) => (path === "/" ? currentPath === path : currentPath.startsWith(path));
+  const isActive = (path) => {
+    if (path === "/") return currentPath === "/";
+    return currentPath.startsWith(path);
+  };
 
   return (
     <NavContainer>
       <Logo>동양 식자재마트(_logo)</Logo>
-      <LinkContainer>
-        <LeftSide>
-          <Link href="/" passHref legacyBehavior>
-            <StyledLink active={isActive("/")}>상품 목록</StyledLink>
+      <NavList>
+        {navItems.map((item, idx, items) => (
+          <Link key={item.path} href={item.path} passHref legacyBehavior>
+            <NavItem active={isActive(item.path)} isLast={items.length - 1 === idx}>
+              {item.label}
+            </NavItem>
           </Link>
-          <Link href="/price" passHref legacyBehavior>
-            <StyledLink active={isActive("/price")}>가격표 보기</StyledLink>
-          </Link>
-        </LeftSide>
-        <RightSide>
-          <Link href="/admin" passHref legacyBehavior>
-            <StyledLink active={isActive("/admin")}>관리자(_hidden)</StyledLink>
-          </Link>
-        </RightSide>
-      </LinkContainer>
+        ))}
+      </NavList>
     </NavContainer>
   );
 };
@@ -46,22 +49,16 @@ const Logo = styled.h1({
   fontWeight: "600",
 });
 
-const LinkContainer = styled.div({
+const NavList = styled.div({
   margin: "16px 0",
 
   display: "flex",
   flex: "1 1 auto",
-  justifyContent: "space-between",
-});
-
-const LeftSide = styled.div({
-  display: "flex",
+  justifyContent: "flex-start",
   gap: "15px",
 });
 
-const RightSide = styled.div({});
-
-const StyledLink = styled.a(
+const NavItem = styled.a(
   {
     display: "inline-block",
     boxSizing: "border-box",
@@ -92,5 +89,6 @@ const StyledLink = styled.a(
   },
   (props) => ({
     color: props.active ? "#1dc078" : "#222222",
+    marginLeft: props.isLast ? "auto" : "",
   })
 );
