@@ -14,7 +14,7 @@ const ProductItem = ({ data }) => {
         width={300}
         height={300}
         alt={title}
-        src={(image.data && getStrapiURL(image.data.attributes.url)) || imageUrl}
+        src={image.data ? getStrapiURL(image.data.attributes.url) : imageUrl}
         style={{ alignSelf: "center" }}
       />
       <CardContent>
