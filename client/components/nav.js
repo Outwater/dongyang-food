@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,17 +6,12 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { media } from "client/utils/media";
 
 const navItems = [
-  { path: "/", label: "상품 목록" },
+  { path: "/products/all", label: "상품 목록" },
   { path: "/price", label: "가격표 보기" },
   { path: "/admin", label: "관리자 페이지" },
 ];
 
 const Nav = () => {
-  const { pathname: currentPath } = useRouter();
-  const isActive = (path) => {
-    if (path === "/") return currentPath === "/";
-    return currentPath.startsWith(path);
-  };
   const [isOpenMobileMenu, setMobileMenu] = useState(false);
   const handleClickMobileMenu = () => {
     setMobileMenu((prev) => !prev);
@@ -25,14 +19,14 @@ const Nav = () => {
 
   return (
     <NavContainer>
-      <Logo>동양 식자재마트(_logo)</Logo>
+      <Link href="/" passHref legacyBehavior>
+        <Logo>동양 식자재마트(_logo)</Logo>
+      </Link>
       <DeskTop>
         <NavList>
           {navItems.map((item, idx, items) => (
             <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem active={isActive(item.path)} isLast={items.length - 1 === idx}>
-                {item.label}
-              </NavItem>
+              <NavItem isLast={items.length - 1 === idx}>{item.label}</NavItem>
             </Link>
           ))}
         </NavList>
@@ -45,9 +39,7 @@ const Nav = () => {
         <MobileNavList isOpen={isOpenMobileMenu}>
           {navItems.map((item) => (
             <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem active={isActive(item.path)} mobile>
-                {item.label}
-              </NavItem>
+              <NavItem mobile>{item.label}</NavItem>
             </Link>
           ))}
         </MobileNavList>
@@ -99,7 +91,6 @@ const NavItem = styled.a(
     padding: "13px 23px",
 
     backgroundColor: "#ffffff",
-    border: "1px solid #222222",
     borderRadius: "8px",
 
     color: "#222222",
@@ -116,7 +107,6 @@ const NavItem = styled.a(
     },
   },
   (props) => ({
-    color: props.active ? "#1dc078" : "#222222",
     marginLeft: props.isLast ? "auto" : "",
     border: props.mobile && "none",
   })
