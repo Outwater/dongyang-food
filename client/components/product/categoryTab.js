@@ -27,37 +27,36 @@ const CategoryTab = () => {
 export default CategoryTab;
 
 const Container = styled.ul({
-  maxWidth: " 1024px",
-  height: " 80px",
-  margin: " 32px auto 0",
+  maxWidth: "1024px",
+  height: "auto",
+  margin: "32px auto",
 
   display: "flex",
-  flexDirection: "column",
+  justifyContent: "center",
   flexWrap: " wrap",
   gap: "15px",
 });
-
 const TabItem = styled.li(
   {
-    width: " 180px",
-    margin: " 0",
-    outline: " none",
-    padding: " 13px 23px",
-    textAlign: " center",
+    width: "180px",
+    margin: "0",
+    padding: "13px 23px",
+    textAlign: "center",
 
-    border: " 1px solid rgba(246, 246, 246, 0.9)",
-    borderRadius: " 4px",
-    boxSizing: " border-box",
-    backgroundColor: " rgba(246, 246, 246, 0.7)",
+    border: "1px solid rgba(246, 246, 246, 0.9)",
+    borderRadius: "4px",
+    backgroundColor: "rgba(246, 246, 246, 0.7)",
 
-    color: " #222222",
-    fontSize: " 16px",
-    fontWeight: " 600",
-    lineHeight: " 20px",
-    textDecoration: " none",
+    color: "#222222",
+    fontSize: "16px",
+    fontWeight: "600",
+    lineHeight: "20px",
 
-    transition: " box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s, transform 0.1s",
-    cursor: " pointer",
+    transition: "box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s, transform 0.1s",
+    cursor: "pointer",
+    "&:hover": {
+      color: "#1dc078",
+    },
   },
   (props) => ({
     color: props.selected ? "#1dc078" : "#222222",
