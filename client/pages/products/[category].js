@@ -41,9 +41,12 @@ export const getStaticProps = async ({ params }) => {
       code: params.category,
     },
     populate: {
-      products: "*",
+      products: {
+        populate: "*",
+      },
     },
   });
+
   return {
     props: {
       products: filteredProducts[0]?.attributes.products.data || [],

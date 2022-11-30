@@ -1,33 +1,31 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import Text from "../../style/Text";
+import { getStrapiURL } from "../../lib/request";
 
 const ProductItem = ({ data }) => {
-  const { title, description, imageUrl, price } = data;
-  const style = css`
-    background-color: red;
-  `;
+  const { title, description, imageUrl, price, image } = data;
+
   return (
     <Card key={title}>
       <Image
         width={300}
         height={300}
         alt={title}
-        src={imageUrl || "/markup/assets/images/product.png"}
+        src={(image.data && getStrapiURL(image.data.attributes.url)) || imageUrl}
+        style={{ alignSelf: "center" }}
       />
-      <div css={style}>박스</div>
       <CardContent>
         <CardInfo>
           <Text size={16}>{title}</Text>
-          <Text size={20} bold={600}>
-            {price}
+          <Text size={20} bold={700}>
+            {price}원
           </Text>
           <Text size={12}>{description}</Text>
         </CardInfo>
-        <FontAwesomeIcon icon={faCartPlus} />
+        <FontAwesomeIcon icon={faCartPlus} size="2x" />
       </CardContent>
     </Card>
   );
@@ -36,7 +34,7 @@ const ProductItem = ({ data }) => {
 export default ProductItem;
 
 const Card = styled.div({
-  width: "300px",
+  width: "320px",
   display: "flex",
   flexDirection: "column",
 });
@@ -45,6 +43,7 @@ const CardContent = styled.div({
   padding: "5px",
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
 });
 
 const CardInfo = styled.div({
