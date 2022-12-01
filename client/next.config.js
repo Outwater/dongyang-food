@@ -17,6 +17,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "strapi-dongyang-food.herokuapp.com",
+      },
+      {
+        protocol: "https",
         hostname: "cdn-mart.baemin.com",
       },
     ],
