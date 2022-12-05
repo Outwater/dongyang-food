@@ -1,17 +1,23 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import useUser from "client/hooks/useUser";
+import useModal from "client/hooks/useModal";
 import { media } from "client/utils/media";
+import { modals } from "./modal/index";
 
 const navItems = [
   { path: "/products/all", label: "상품 목록" },
   { path: "/price", label: "가격표 보기" },
-  { path: "/admin", label: "관리자 페이지" },
 ];
 
 const Nav = () => {
+  const router = useRouter();
+  const { isAdmin } = useUser();
+  const { openModal } = useModal();
   const [isOpenMobileMenu, setMobileMenu] = useState(false);
   const handleClickMobileMenu = () => {
     setMobileMenu((prev) => !prev);
@@ -24,11 +30,24 @@ const Nav = () => {
       </Link>
       <DeskTop>
         <NavList>
-          {navItems.map((item, idx, items) => (
+          {navItems.map((item) => (
             <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem isLast={items.length - 1 === idx}>{item.label}</NavItem>
+              <NavItem>{item.label}</NavItem>
             </Link>
           ))}
+          <NavItem
+            onClick={() => {
+              isAdmin
+                ? router.push("/admin")
+                : openModal(modals.adminAuth, {
+                    onSubmit: () => {
+                      router.push("/admin");
+                    },
+                  });
+            }}
+            isLast>
+            관리자 페이지
+          </NavItem>
         </NavList>
       </DeskTop>
 
@@ -42,6 +61,18 @@ const Nav = () => {
               <NavItem mobile>{item.label}</NavItem>
             </Link>
           ))}
+          <NavItem
+            onClick={() => {
+              isAdmin
+                ? router.push("/admin")
+                : openModal(modals.adminAuth, {
+                    onSubmit: () => {
+                      router.push("/admin");
+                    },
+                  });
+            }}>
+            관리자 페이지
+          </NavItem>
         </MobileNavList>
       </Mobile>
     </NavContainer>
