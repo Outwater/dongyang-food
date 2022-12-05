@@ -7,6 +7,7 @@ import reset from "client/style/reset";
 import globalStyle from "client/style/global";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import ModalsProvider from "client/context/modal";
 import UserProvider from "client/context/user";
 config.autoAddCss = false;
 /*
@@ -28,7 +29,9 @@ const MyApp = ({ Component, pageProps }) => {
       <Global styles={globalStyle} />
       <GlobalContext.Provider value={global.attributes}>
         <UserProvider>
-          <Component {...pageProps} />
+          <ModalsProvider>
+            <Component {...pageProps} />
+          </ModalsProvider>
         </UserProvider>
       </GlobalContext.Provider>
     </>
