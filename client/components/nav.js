@@ -12,6 +12,7 @@ import { modals } from "./modal/index";
 const navItems = [
   { path: "/products/all", label: "상품 목록" },
   { path: "/price", label: "가격표 보기" },
+  { path: "/admin", label: "관리자 페이지" },
 ];
 
 const Nav = () => {
@@ -30,24 +31,31 @@ const Nav = () => {
       </Link>
       <DeskTop>
         <NavList>
-          {navItems.map((item) => (
-            <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem>{item.label}</NavItem>
-            </Link>
-          ))}
-          <NavItem
-            onClick={() => {
-              isAdmin
-                ? router.push("/admin")
-                : openModal(modals.adminAuth, {
-                    onSubmit: () => {
-                      router.push("/admin");
-                    },
-                  });
-            }}
-            isLast>
-            관리자 페이지
-          </NavItem>
+          {navItems.map(({ path, label }) => {
+            if (path === "/admin") {
+              return (
+                <NavItem
+                  key={path}
+                  onClick={() => {
+                    isAdmin
+                      ? router.push("/admin")
+                      : openModal(modals.adminAuth, {
+                          onSubmit: () => {
+                            router.push("/admin");
+                          },
+                        });
+                  }}
+                  isLast>
+                  관리자 페이지
+                </NavItem>
+              );
+            }
+            return (
+              <Link key={path} href={path} passHref legacyBehavior>
+                <NavItem>{label}</NavItem>
+              </Link>
+            );
+          })}
         </NavList>
       </DeskTop>
 
@@ -56,23 +64,30 @@ const Nav = () => {
           <FontAwesomeIcon icon={faBars} size="2x" />
         </MenuButton>
         <MobileNavList isOpen={isOpenMobileMenu}>
-          {navItems.map((item) => (
-            <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem mobile>{item.label}</NavItem>
-            </Link>
-          ))}
-          <NavItem
-            onClick={() => {
-              isAdmin
-                ? router.push("/admin")
-                : openModal(modals.adminAuth, {
-                    onSubmit: () => {
-                      router.push("/admin");
-                    },
-                  });
-            }}>
-            관리자 페이지
-          </NavItem>
+          {navItems.map(({ path, label }) => {
+            if (path === "/admin") {
+              return (
+                <NavItem
+                  key={path}
+                  onClick={() => {
+                    isAdmin
+                      ? router.push("/admin")
+                      : openModal(modals.adminAuth, {
+                          onSubmit: () => {
+                            router.push("/admin");
+                          },
+                        });
+                  }}>
+                  관리자 페이지
+                </NavItem>
+              );
+            }
+            return (
+              <Link key={path} href={path} passHref legacyBehavior>
+                <NavItem mobile>{label}</NavItem>
+              </Link>
+            );
+          })}
         </MobileNavList>
       </Mobile>
     </NavContainer>

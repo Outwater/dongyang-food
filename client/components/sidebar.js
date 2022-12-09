@@ -17,7 +17,9 @@ const Sidebar = () => {
         <SidebarList>
           {sidebarItems.map(({ path, label }) => (
             <Link key={path} href={path} passHref legacyBehavior>
-              <SidebarItem active={path.startsWith(pathname)}>{label}</SidebarItem>
+              <SidebarItem active={pathname !== "/admin" && path.startsWith(pathname)}>
+                {label}
+              </SidebarItem>
             </Link>
           ))}
         </SidebarList>
