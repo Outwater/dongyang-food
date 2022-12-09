@@ -1,5 +1,5 @@
 import request from "client/lib/request";
-import Layout from "client/components/layout";
+import Layout from "client/components/layout/shop";
 import ProductList from "client/components/product/list";
 
 const Category = ({ products }) => {

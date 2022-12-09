@@ -1,7 +1,7 @@
-import request from "../lib/request";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import ProductList from "../components/product/list";
+import request from "client/lib/request";
+import Layout from "client/components/layout/shop";
+import Seo from "client/components/seo";
+import ProductList from "client/components/product/list";
 
 const Home = ({ products, homepage }) => {
   return (
