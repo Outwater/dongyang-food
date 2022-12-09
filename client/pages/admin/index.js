@@ -1,22 +1,23 @@
-import Layout from "client/components/layout";
+import AdminLayout from "client/components/layout/admin";
+import ShopLayout from "client/components/layout/shop";
+
 import useUser from "client/hooks/useUser";
 
 const Admin = () => {
   const { isAdmin } = useUser();
 
-  if (!isAdmin) {
+  if (!isAdmin)
     return (
-      <Layout>
+      <ShopLayout>
         <h1>관리자 로그인이 필요한 페이지 입니다.</h1>
-      </Layout>
+      </ShopLayout>
     );
-  }
 
   return (
-    <Layout>
+    <AdminLayout>
       {`관리자 로그인 여부 : ${isAdmin}`}
-      <h1>Admin페이지</h1>
-    </Layout>
+      <h1>Admin페이지 홈</h1>
+    </AdminLayout>
   );
 };
 
