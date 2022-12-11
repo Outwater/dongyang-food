@@ -7,6 +7,8 @@ import reset from "client/style/reset";
 import globalStyle from "client/style/global";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import ModalsProvider from "client/context/modal";
+import UserProvider from "client/context/user";
 config.autoAddCss = false;
 /*
  strapi로 부터 받아온 Global object를 저장한다.
@@ -26,7 +28,11 @@ const MyApp = ({ Component, pageProps }) => {
       <Global styles={reset} />
       <Global styles={globalStyle} />
       <GlobalContext.Provider value={global.attributes}>
-        <Component {...pageProps} />
+        <UserProvider>
+          <ModalsProvider>
+            <Component {...pageProps} />
+          </ModalsProvider>
+        </UserProvider>
       </GlobalContext.Provider>
     </>
   );

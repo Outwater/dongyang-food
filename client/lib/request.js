@@ -18,8 +18,9 @@ const request = async (path, urlParamsObject = {}, options = {}) => {
   const response = await fetch(requestUrl, mergedOptions);
 
   if (!response.ok) {
-    console.error(response.statusText);
-    throw new Error(`API 요청 중 에러가 발생했습니다.`);
+    const { error } = await response.json();
+    console.log(error);
+    throw new Error(`API 요청 중 에러 발생 ${error.name}(${error.status}) ${error.message}`);
   }
   const data = await response.json();
   return data;

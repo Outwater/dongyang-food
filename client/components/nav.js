@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import useUser from "client/hooks/useUser";
+import useModal from "client/hooks/useModal";
 import { media } from "client/utils/media";
+import { modals } from "./modal/index";
 
 const navItems = [
   { path: "/products/all", label: "상품 목록" },
@@ -12,6 +16,9 @@ const navItems = [
 ];
 
 const Nav = () => {
+  const router = useRouter();
+  const { isAdmin } = useUser();
+  const { openModal } = useModal();
   const [isOpenMobileMenu, setMobileMenu] = useState(false);
   const handleClickMobileMenu = () => {
     setMobileMenu((prev) => !prev);
@@ -24,11 +31,31 @@ const Nav = () => {
       </Link>
       <DeskTop>
         <NavList>
-          {navItems.map((item, idx, items) => (
-            <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem isLast={items.length - 1 === idx}>{item.label}</NavItem>
-            </Link>
-          ))}
+          {navItems.map(({ path, label }) => {
+            if (path === "/admin") {
+              return (
+                <NavItem
+                  key={path}
+                  onClick={() => {
+                    isAdmin
+                      ? router.push("/admin")
+                      : openModal(modals.adminAuth, {
+                          onSubmit: () => {
+                            router.push("/admin");
+                          },
+                        });
+                  }}
+                  isLast>
+                  관리자 페이지
+                </NavItem>
+              );
+            }
+            return (
+              <Link key={path} href={path} passHref legacyBehavior>
+                <NavItem>{label}</NavItem>
+              </Link>
+            );
+          })}
         </NavList>
       </DeskTop>
 
@@ -37,11 +64,30 @@ const Nav = () => {
           <FontAwesomeIcon icon={faBars} size="2x" />
         </MenuButton>
         <MobileNavList isOpen={isOpenMobileMenu}>
-          {navItems.map((item) => (
-            <Link key={item.path} href={item.path} passHref legacyBehavior>
-              <NavItem mobile>{item.label}</NavItem>
-            </Link>
-          ))}
+          {navItems.map(({ path, label }) => {
+            if (path === "/admin") {
+              return (
+                <NavItem
+                  key={path}
+                  onClick={() => {
+                    isAdmin
+                      ? router.push("/admin")
+                      : openModal(modals.adminAuth, {
+                          onSubmit: () => {
+                            router.push("/admin");
+                          },
+                        });
+                  }}>
+                  관리자 페이지
+                </NavItem>
+              );
+            }
+            return (
+              <Link key={path} href={path} passHref legacyBehavior>
+                <NavItem mobile>{label}</NavItem>
+              </Link>
+            );
+          })}
         </MobileNavList>
       </Mobile>
     </NavContainer>

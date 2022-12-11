@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import Text from "../../style/Text";
+import Text from "client/components/common/Text";
 import { getStrapiURL } from "../../lib/request";
 
 const ProductItem = ({ data }) => {
