@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 import request from "client/lib/request";
 import { UserDispatchContext } from "client/context/user";
 import useInput from "client/hooks/useInput";
+import StyledButton from "client/components/common/Button";
 import Text from "client/components/common/Text";
 
 const AdminAuthModal = ({ onSubmit, onClose }) => {
@@ -109,19 +110,4 @@ const ButtonWrapper = styled.div({
   display: "flex",
   justifyContent: "center",
   gap: "16px",
-});
-const StyledButton = styled.button({
-  height: "48px",
-  padding: "8px 24px",
-  fontSize: "18px",
-  fontWeight: 700,
-  color: "white",
-  backgroundColor: "#1dc078",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-
-  "&:hover": {
-    backgroundColor: "tomato",
-  },
 });
