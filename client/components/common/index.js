@@ -1,6 +1,6 @@
 import Filter from "./Filter";
-import Table from "./Table";
+import DataTable from "./DataTable";
 import Text from "./Text";
 import StyledButton from "./Button";
 
-export { Filter, Table, Text, StyledButton };
+export { Filter, DataTable, Text, StyledButton };
