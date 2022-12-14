@@ -15,10 +15,6 @@
     "name": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "name"
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",

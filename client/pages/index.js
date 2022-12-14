@@ -1,4 +1,4 @@
-import request from "client/lib/request";
+import API from "client/api";
 import Layout from "client/components/layout/shop";
 import Seo from "client/components/seo";
 import ProductList from "client/components/product/list";
@@ -13,17 +13,13 @@ const Home = ({ products, homepage }) => {
 };
 
 export const getStaticProps = async () => {
-  const { data: products } = await request(`/products?populate=*`);
-  const { data: homepage } = await request(`/home-page`, {
-    populate: {
-      seo: { populate: "*" },
-    },
-  });
+  const products = await API.getProductList();
+  const homepageSeo = await API.getPageSeo("/home-page");
 
   return {
     props: {
       products,
-      homepage,
+      homepage: homepageSeo,
     },
   };
 };

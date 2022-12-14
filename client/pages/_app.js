@@ -1,7 +1,8 @@
 import App from "next/app";
 import Head from "next/head";
 import { createContext } from "react";
-import request, { getStrapiURL } from "../lib/request";
+import API from "client/api";
+import { getStrapiURL } from "client/api/utils/request";
 import { Global } from "@emotion/react";
 import reset from "client/style/reset";
 import globalStyle from "client/style/global";
@@ -40,17 +41,9 @@ const MyApp = ({ Component, pageProps }) => {
 
 MyApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx);
+  const globalRes = await API.getGlobalSeo();
 
-  const globalRes = await request("/global", {
-    populate: {
-      favicon: "*",
-      defaultSeo: {
-        populate: "*",
-      },
-    },
-  });
-
-  return { ...appProps, pageProps: { global: globalRes.data } };
+  return { ...appProps, pageProps: { global: globalRes } };
 };
 
 export default MyApp;

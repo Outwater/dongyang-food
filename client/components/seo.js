@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { getStrapiURL } from "../lib/request";
+import { getStrapiURL } from "client/api/utils/request";
 import { GlobalContext } from "../pages/_app";
 
 const Seo = ({ seo }) => {

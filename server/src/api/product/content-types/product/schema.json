@@ -25,10 +25,6 @@
     "description": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -42,14 +38,15 @@
       "inversedBy": "products"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

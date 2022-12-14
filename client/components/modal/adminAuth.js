@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import styled from "@emotion/styled";
 import ReactModal from "react-modal";
-import request from "client/lib/request";
+import API from "client/api";
 import { UserDispatchContext } from "client/context/user";
 import useInput from "client/hooks/useInput";
 import StyledButton from "client/components/common/Button";
 import Text from "client/components/common/Text";
+import { useRouter } from "next/router";
 
 const AdminAuthModal = ({ onSubmit, onClose }) => {
+  const router = useRouter();
   const [id, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput("");
   const { adminLogin } = useContext(UserDispatchContext);
@@ -16,28 +18,13 @@ const AdminAuthModal = ({ onSubmit, onClose }) => {
     e.preventDefault();
 
     const checkAdmin = async (id, password) => {
-      const { jwt } = await request("/auth/local", undefined, {
-        method: "POST",
-        body: JSON.stringify({
-          identifier: id,
-          password,
-        }),
-      });
-      if (!jwt) return false;
+      const { jwt: token } = await API.login(id, password);
+      if (!token) return false;
 
-      const tokenInfo = await request(
-        "/users/me",
-        { populate: "*" },
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      );
-      const { role } = tokenInfo;
-
+      const { role } = await API.checkJwt(token);
       return role && role.name === "Admin";
     };
+
     const isAdmin = await checkAdmin(id, password);
 
     if (isAdmin) {
@@ -53,12 +40,21 @@ const AdminAuthModal = ({ onSubmit, onClose }) => {
     onClose();
   };
 
+  const handleHiddenLogin = () => {
+    const path = router.pathname.startsWith("/admin") ? router.pathname : "/admin";
+    router.push(path);
+    adminLogin();
+    onClose();
+  };
   return (
     <ReactModal isOpen ariaHideApp={false} style={{ content: { height: "fit-content" } }}>
       <FormContainer onSubmit={handleClickLogin}>
         <Text bold={700} size={24} full center>
           관리자 로그인
         </Text>
+        <StyledButton type="button" onClick={handleHiddenLogin}>
+          Hidden 로그인
+        </StyledButton>
         <FormWrapper>
           <StyledLabel htmlFor="adminId">관리자 이메일</StyledLabel>
           <StyledInput type="text" id="adminId" value={id} onChange={onChangeId} />

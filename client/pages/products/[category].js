@@ -1,4 +1,4 @@
-import request from "client/lib/request";
+import API from "client/api";
 import Layout from "client/components/layout/shop";
 import ProductList from "client/components/product/list";
 
@@ -11,45 +11,40 @@ const Category = ({ products }) => {
 };
 
 export const getStaticPaths = async () => {
-  const { data: categoriesRes } = await request(`/categories`, { fields: ["name", "code"] });
+  const categoriesRes = await API.getCategoryList({ fields: ["name", "code"] });
+  const categroyPaths = categoriesRes.map((category) => ({
+    params: {
+      category: String(category.attributes.code),
+    },
+  }));
+  const entireProductPath = { params: { category: "all" } };
+
   return {
-    paths: [
-      { params: { category: "all" } },
-      ...categoriesRes.map((category) => ({
-        params: {
-          category: String(category.attributes.code),
-        },
-      })),
-    ],
+    paths: [entireProductPath, ...categroyPaths],
     fallback: "blocking",
   };
 };
 
 export const getStaticProps = async ({ params }) => {
   if (params.category === "all") {
-    const { data: entireProducts } = await request("/products", {
-      populate: "*",
-    });
+    const products = (await API.getProductList()) ?? [];
+
     return {
       props: {
-        products: entireProducts || [],
+        products,
       },
     };
   }
-  const { data: filteredProducts } = await request(`/categories`, {
-    filters: {
-      code: params.category,
-    },
-    populate: {
-      products: {
-        populate: "*",
-      },
-    },
-  });
+
+  const filteredProducts =
+    (await API.getProductList({
+      populate: "*",
+      filters: { category: { code: params.category } },
+    })) ?? [];
 
   return {
     props: {
-      products: filteredProducts[0]?.attributes.products.data || [],
+      products: filteredProducts,
     },
   };
 };
