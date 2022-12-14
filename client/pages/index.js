@@ -13,12 +13,12 @@ const Home = ({ products, homepage }) => {
 };
 
 export const getStaticProps = async () => {
-  const products = await API.getProductList();
+  const productsRes = await API.getProductList();
   const homepageSeo = await API.getPageSeo("/home-page");
 
   return {
     props: {
-      products,
+      products: productsRes.isEmpty ? [] : productsRes.productList,
       homepage: homepageSeo,
     },
   };

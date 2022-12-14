@@ -27,24 +27,23 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   if (params.category === "all") {
-    const products = (await API.getProductList()) ?? [];
+    const productsRes = await API.getProductList();
 
     return {
       props: {
-        products,
+        products: productsRes.isEmpty ? [] : productsRes.productList,
       },
     };
   }
 
-  const filteredProducts =
-    (await API.getProductList({
-      populate: "*",
-      filters: { category: { code: params.category } },
-    })) ?? [];
+  const filteredProductsRes = await API.getProductList({
+    populate: "*",
+    filters: { category: { code: params.category } },
+  });
 
   return {
     props: {
-      products: filteredProducts,
+      products: filteredProductsRes.isEmpty ? [] : filteredProductsRes.productList,
     },
   };
 };

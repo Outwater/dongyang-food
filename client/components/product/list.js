@@ -17,9 +17,9 @@ const ProductList = ({ products }) => {
     <>
       <CategoryTab />
       <GridContainer>
-        {products?.map((product) => (
+        {products.map((product) => (
           <React.Fragment key={product.id}>
-            <ProductItem data={product.attributes} />
+            <ProductItem data={product} />
           </React.Fragment>
         ))}
       </GridContainer>
