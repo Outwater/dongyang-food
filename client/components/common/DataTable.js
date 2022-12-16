@@ -1,26 +1,57 @@
+import qs from "qs";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+/*
+type columns = {
+  title: string,
+  key: string,
+  dataIndex: string
+  render?: (rowData, cellData) => React.Node
+}[]
+type dataSource = {
+  id: number,
+  [key:string]: any
+}[]
+*/
 
 const DataTable = ({ dataSource, columns, ...props }) => {
-  // const {} = useTable({data, columns, actions})
+  const router = useRouter();
+  const [rows, setRows] = useState(dataSource);
+
+  useEffect(() => {
+    const { filters } = qs.parse(router.query);
+    if (!filters) {
+      setRows(dataSource);
+      return;
+    }
+    const filteredRows = Object.entries(filters).reduce((acc, [key, value]) => {
+      return acc.filter((data) => data[key] == value);
+    }, dataSource);
+    setRows(filteredRows);
+  }, [router]);
+
   return (
     <Container {...props}>
       <Head>
         <Row>
           {columns.map((col) => (
-            <HeadCell> {col.title}</HeadCell>
+            <HeadCell key={col.title}>{col.title}</HeadCell>
           ))}
         </Row>
       </Head>
       <Body>
-        {dataSource.map((data) => (
-          <Row>
-            {columns.map((col) => {
-              if (col.key === "action") {
-                return <Cell>{col.render(data)}</Cell>;
+        {rows.map((data) => (
+          <Row key={data.id}>
+            {columns.map((col, idx) => {
+              const key = data.id + col.key + idx;
+              if (col.render) {
+                return <Cell key={key}>{col.render(data, data[col.dataIndex])}</Cell>;
               }
 
-              const content = data?.[col.key];
-              return <Cell>{content || "컨텐츠 없음!"}</Cell>;
+              const content = data[col.dataIndex] ?? "";
+              return <Cell key={key}>{content}</Cell>;
             })}
           </Row>
         ))}
