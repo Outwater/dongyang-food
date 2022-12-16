@@ -28,14 +28,15 @@ const Admin = ({ children }) => {
 export default Admin;
 
 const BackGround = styled.div({
-  height: "100vh",
+  height: "100%",
   backgroundColor: "rgb(238, 238, 238)",
 });
 
 const Contents = styled.div({
   width: "100%",
-  height: "calc(100vh - 92px)",
+  minHeight: "calc(100vh - 92px)",
   margin: "0 12px",
+  padding: "36px",
 
   backgroundColor: "white",
 });

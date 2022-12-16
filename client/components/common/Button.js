@@ -1,4 +1,4 @@
-const Button = ({ children, size = "normal", ...props }) => {
+const Button = ({ children, size = "normal", addStyle, ...props }) => {
   const sizeMaps = {
     small: {
       height: "36px",
@@ -26,7 +26,7 @@ const Button = ({ children, size = "normal", ...props }) => {
     "&:hover": {
       backgroundColor: "tomato",
     },
-    ...props.addStyle,
+    ...addStyle,
   };
 
   return (
