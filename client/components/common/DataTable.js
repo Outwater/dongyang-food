@@ -2,56 +2,38 @@ import qs from "qs";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useDataTable from "client/lib/table/index";
 
-/*
-type columns = {
-  title: string,
-  key: string,
-  dataIndex: string
-  render?: (rowData, cellData) => React.Node
-}[]
-type dataSource = {
-  id: number,
-  [key:string]: any
-}[]
-*/
-
-const DataTable = ({ dataSource, columns, ...props }) => {
+const DataTable = ({ dataSource, tableModel, ...props }) => {
   const router = useRouter();
-  const [rows, setRows] = useState(dataSource);
+
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  const { headerGroups, rowModel } = useDataTable({
+    dataSource,
+    tableModel,
+    globalFilter,
+  });
 
   useEffect(() => {
-    const { filters } = qs.parse(router.query);
-    if (!filters) {
-      setRows(dataSource);
-      return;
-    }
-    const filteredRows = Object.entries(filters).reduce((acc, [key, value]) => {
-      return acc.filter((data) => data[key] == value);
-    }, dataSource);
-    setRows(filteredRows);
+    const urlParamsFilter = qs.parse(router.query).filters;
+    setGlobalFilter(urlParamsFilter);
   }, [router]);
 
   return (
     <Container {...props}>
       <Head>
         <Row>
-          {columns.map((col) => (
-            <HeadCell key={col.title}>{col.title}</HeadCell>
-          ))}
+          {headerGroups.map((header) => {
+            return <HeadCell key={header.id}>{header.render({ cellProps: header })}</HeadCell>;
+          })}
         </Row>
       </Head>
       <Body>
-        {rows.map((data) => (
-          <Row key={data.id}>
-            {columns.map((col, idx) => {
-              const key = data.id + col.key + idx;
-              if (col.render) {
-                return <Cell key={key}>{col.render(data, data[col.dataIndex])}</Cell>;
-              }
-
-              const content = data[col.dataIndex] ?? "";
-              return <Cell key={key}>{content}</Cell>;
+        {rowModel.map((row) => (
+          <Row key={row.id}>
+            {row.cells.map((cell) => {
+              return <Cell key={cell.id}>{cell.render({ cellProps: cell })}</Cell>;
             })}
           </Row>
         ))}
