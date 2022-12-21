@@ -25,7 +25,7 @@ const DataTable = ({ dataSource, tableModel, ...props }) => {
       <Head>
         <Row>
           {headerGroups.map((header) => {
-            return <HeadCell key={header.id}>{header.render({ cellProps: header })}</HeadCell>;
+            return <HeadCell key={header.id}>{header.render({ headerProps: header })}</HeadCell>;
           })}
         </Row>
       </Head>

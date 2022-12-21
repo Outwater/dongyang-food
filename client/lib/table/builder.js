@@ -11,7 +11,7 @@ const createHeaderGroups = (tableModel) => {
       render:
         header && typeof header.render === "function"
           ? header.render
-          : ({ cellProps }) => cellProps.label,
+          : ({ headerProps }) => headerProps.label,
     };
   });
 
@@ -36,6 +36,7 @@ const createCells = (data, tableModel) => {
 
     return {
       id: generateId("tableCell"),
+      rowData: data,
       label,
       accessor,
       value,
