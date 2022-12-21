@@ -1,6 +1,6 @@
 import API from "client/api";
 import Layout from "client/components/layout/shop";
-import ProductList from "client/components/product/list";
+import ProductList from "client/components/shop/product/list";
 
 const Category = ({ products }) => {
   return (

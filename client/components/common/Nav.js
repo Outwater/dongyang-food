@@ -1,13 +1,13 @@
-import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import useUser from "client/hooks/useUser";
 import useModal from "client/hooks/useModal";
 import { media } from "client/utils/media";
-import { modals } from "./modal/index";
+import { modals } from "../modal/index";
 
 const navItems = [
   { path: "/products/all", label: "상품 목록" },

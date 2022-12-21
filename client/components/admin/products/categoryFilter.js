@@ -38,6 +38,7 @@ const CategoryFilter = ({ path }) => {
     <Container>
       {categoryItems.map(({ id, label }) => (
         <TabItem
+          key={id}
           onClick={() => handleItemClick(id)}
           selected={urlParamsObject?.filters.categoryCode === id}>
           {label}

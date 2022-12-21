@@ -1,7 +1,7 @@
 import API from "client/api";
 import Layout from "client/components/layout/shop";
-import Seo from "client/components/seo";
-import ProductList from "client/components/product/list";
+import Seo from "client/components/common/Seo";
+import ProductList from "client/components/shop/product/list";
 
 const Home = ({ products, homepage }) => {
   return (
