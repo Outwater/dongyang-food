@@ -5,14 +5,6 @@ import ProductItem from "./item";
 import { media } from "client/utils/media";
 
 const ProductList = ({ products }) => {
-  if (products.length === 0) {
-    return (
-      <>
-        <CategoryTab />
-        <div>물품 없음</div>
-      </>
-    );
-  }
   return (
     <>
       <CategoryTab />

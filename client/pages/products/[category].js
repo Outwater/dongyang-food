@@ -1,11 +1,19 @@
 import API from "client/api";
 import Layout from "client/components/layout/shop";
+import CategoryTab from "client/components/shop/product/categoryTab";
 import ProductList from "client/components/shop/product/list";
 
 const Category = ({ products }) => {
   return (
     <Layout>
-      <ProductList products={products} />
+      {products.isEmpty ? (
+        <>
+          <CategoryTab />
+          <div>물품 없음</div>
+        </>
+      ) : (
+        <ProductList products={products.productList} />
+      )}
     </Layout>
   );
 };
@@ -31,7 +39,7 @@ export const getStaticProps = async ({ params }) => {
 
     return {
       props: {
-        products: productsRes.isEmpty ? [] : productsRes.productList,
+        products: productsRes,
       },
     };
   }
@@ -43,7 +51,7 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: {
-      products: filteredProductsRes.isEmpty ? [] : filteredProductsRes.productList,
+      products: filteredProductsRes,
     },
   };
 };
