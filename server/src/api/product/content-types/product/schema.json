@@ -47,6 +47,18 @@
         "videos",
         "audios"
       ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "selling",
+        "stop",
+        "soldout"
+      ]
+    },
+    "stock": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
