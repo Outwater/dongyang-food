@@ -4,7 +4,7 @@ import API from "client/api";
 import { getStrapiURL } from "client/api/utils/request";
 import { Admin as Layout, Stack } from "client/components/layout";
 import { DataTable, Text, StyledButton } from "client/components/common";
-import CategoryFilter from "client/components/admin/products/categoryFilter";
+import CategoryFilter from "client/components/admin/products/CategoryFilter";
 import ProductDataTable from "client/components/admin/products/ProductDataTable";
 import { TableModel } from "client/lib/table/types";
 import { Product, Products } from "client/types";

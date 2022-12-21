@@ -1,4 +1,4 @@
-import Layout from "client/components/layout/shop";
+import Layout from "client/components/layout/Shop";
 
 const Price = ({}) => {
   return (

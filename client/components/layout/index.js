@@ -1,5 +1,5 @@
-import Admin from "./admin";
-import Shop from "./shop";
-import Stack from "./stack";
+import Admin from "./Admin";
+import Shop from "./Shop";
+import Stack from "./Stack";
 
 export { Admin, Shop, Stack };

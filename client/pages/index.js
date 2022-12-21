@@ -1,5 +1,5 @@
 import API from "client/api";
-import Layout from "client/components/layout/shop";
+import Layout from "client/components/layout/Shop";
 import Seo from "client/components/common/Seo";
 import CategoryTab from "client/components/shop/product/categoryTab";
 import ProductList from "client/components/shop/product/list";

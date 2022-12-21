@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import CategoryTab from "./categoryTab";
-import ProductItem from "./item";
+import CategoryTab from "./CategoryTab";
+import ProductItem from "./Item";
 import { media } from "client/utils/media";
 
 const ProductList = ({ products }) => {

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import useUser from "client/hooks/useUser";
-import Stack from "./stack";
-import ShopLayout from "./shop";
+import Stack from "./Stack";
+import ShopLayout from "./Shop";
 import { Nav, Sidebar } from "client/components/common";
 
 const Admin = ({ children }) => {
