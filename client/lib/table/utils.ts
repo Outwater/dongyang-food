@@ -2,7 +2,7 @@ let currId = 0;
 
 const idMap = new Map();
 
-export function generateId(key) {
+export function generateId(key: string) {
   if (idMap.has(key)) {
     const id = idMap.get(key);
     const nextId = id + 1;

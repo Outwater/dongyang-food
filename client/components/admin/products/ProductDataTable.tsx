@@ -1,23 +1,30 @@
-import qs from "qs";
-import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import qs from "qs";
 import useDataTable from "client/lib/table/index";
+import { TableModel } from "client/lib/table/types";
+import { Product } from "client/types";
 
-const DataTable = ({ dataSource, tableModel, ...props }) => {
+interface ProductDataTableProps {
+  dataSource: Product[];
+  tableModel: TableModel<Product>;
+}
+
+const ProductDataTable = ({ dataSource, tableModel, ...props }: ProductDataTableProps) => {
   const router = useRouter();
 
   const [globalFilter, setGlobalFilter] = useState("");
 
-  const { headerGroups, rowModel } = useDataTable({
+  const { headerGroups, rowModel } = useDataTable<Product>({
     dataSource,
     tableModel,
     globalFilter,
   });
 
   useEffect(() => {
-    const urlParamsFilter = qs.parse(router.query).filters;
-    setGlobalFilter(urlParamsFilter);
+    const urlParamsFilter = qs.parse(router.query as any).filters;
+    setGlobalFilter(urlParamsFilter as any);
   }, [router]);
 
   return (
@@ -42,7 +49,7 @@ const DataTable = ({ dataSource, tableModel, ...props }) => {
   );
 };
 
-export default DataTable;
+export default ProductDataTable;
 
 const Container = styled.table({
   width: "100%",

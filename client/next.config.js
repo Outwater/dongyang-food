@@ -3,7 +3,7 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     NEXT_PUBLIC_STRAPI_API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL,
   },

@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { createHeaderGroups, createRowModel } from "./builder";
+import { TableModel } from "./types";
 
 //Todo: search 시 include의 경우 filterQuery 처리
 //strapi 사례: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.html#filtering
 
-const useDataTable = ({ dataSource, tableModel, globalFilter }) => {
+interface Options<Row> {
+  dataSource: Row[];
+  tableModel: TableModel<Row>;
+  globalFilter: any;
+}
+
+export default function useDataTable<Row>({ dataSource, tableModel, globalFilter }: Options<Row>) {
   const [rows, setRows] = useState(dataSource);
 
   useEffect(() => {
@@ -21,10 +28,8 @@ const useDataTable = ({ dataSource, tableModel, globalFilter }) => {
   }, [globalFilter]);
 
   return {
-    headerGroups: createHeaderGroups(tableModel),
+    headerGroups: createHeaderGroups<Row>(tableModel),
     originRowModel: dataSource,
-    rowModel: createRowModel(rows, tableModel),
+    rowModel: createRowModel<Row>(rows, tableModel),
   };
-};
-
-export default useDataTable;
+}
