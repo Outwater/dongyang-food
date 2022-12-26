@@ -52,15 +52,16 @@ export default CategoryFilter;
 
 const Container = styled.ul({
   maxWidth: "1024px",
+  width: "100%",
   height: "auto",
   margin: "32px auto",
 
   display: "flex",
   justifyContent: "center",
-  flexWrap: " wrap",
+  flexWrap: "wrap",
   gap: "15px",
 });
-const TabItem = styled.li(
+const TabItem = styled.li<{ selected: boolean }>(
   {
     width: "180px",
     margin: "0",
