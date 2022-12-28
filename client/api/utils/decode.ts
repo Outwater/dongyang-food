@@ -1,11 +1,16 @@
-import { Product, ProductListResponse, ProductResponse } from "client/types/product";
+import { Product, ProductAttribute } from "client/types/product";
+import { StrapiListResponse } from "../../types/strapi";
 
-export const decodeProductList = (init: ProductListResponse) => ({
+export const decodeProductList = (init: StrapiListResponse<ProductAttribute>) => ({
   productList: init.data.map(decodeProduct),
   isEmpty: init.data.length === 0,
 });
 
-export const decodeProduct = (init: ProductResponse): Product => {
+interface ProductInit {
+  id: number;
+  attributes: ProductAttribute;
+}
+export const decodeProduct = (init: ProductInit): Product => {
   const { title, imageUrl, price, description, stock, status, image, category, sub_category } =
     init.attributes;
 

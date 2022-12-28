@@ -1,7 +1,8 @@
-import request from "./utils/request";
+import { StrapiGlobalSeo, StrapiPageSeo, StrapiResponse } from "client/types/strapi";
+import request, { StrapiUrlParamsObject } from "./utils/request";
 
-const getGlobalSeo = async (options) => {
-  const response = await request(
+const getGlobalSeo = async (options: RequestInit) => {
+  const response = await request<StrapiResponse<StrapiGlobalSeo>>(
     "/global",
     {
       populate: {
@@ -17,11 +18,11 @@ const getGlobalSeo = async (options) => {
 };
 
 const getPageSeo = async (
-  path,
-  urlParamsOptions = { populate: { seo: { populate: "*" } } },
-  options
+  path: string,
+  urlParamsOptions: StrapiUrlParamsObject = { populate: { seo: { populate: "*" } } },
+  options: RequestInit
 ) => {
-  const response = await request(path, urlParamsOptions, options);
+  const response = await request<StrapiResponse<StrapiPageSeo>>(path, urlParamsOptions, options);
   return response.data;
 };
 

@@ -1,13 +1,24 @@
-import request from "./utils/request";
+import { CategoryAttribute, StrapiListResponse } from "client/types";
+import request, { StrapiUrlParamsObject } from "./utils/request";
 import { decodeProductList } from "./utils/decode";
 
-export const getProductList = async (urlParamsOptions = { populate: "*" }, options) => {
+export const getProductList = async (
+  urlParamsOptions: StrapiUrlParamsObject = { populate: "*" },
+  options: RequestInit = {}
+) => {
   const response = await request("/products", urlParamsOptions, options).then(decodeProductList);
   return response;
 };
 
-export const getCategoryList = async (urlParamsOptions = { populate: "*" }, options) => {
-  const response = await request("/categories", urlParamsOptions, options);
+export const getCategoryList = async (
+  urlParamsOptions: StrapiUrlParamsObject = { populate: "*" },
+  options: RequestInit = {}
+) => {
+  const response = await request<StrapiListResponse<CategoryAttribute>>(
+    "/categories",
+    urlParamsOptions,
+    options
+  );
   return response.data;
 };
 

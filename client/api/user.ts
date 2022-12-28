@@ -1,7 +1,8 @@
+import { LoginResponse, UserCheckResponse } from "client/types";
 import request from "./utils/request";
 
-const login = (id, password) => {
-  return request("/auth/local", null, {
+const login = (id: string, password: string) => {
+  return request<LoginResponse>("/auth/local", null, {
     method: "POST",
     body: JSON.stringify({
       identifier: id,
@@ -10,8 +11,8 @@ const login = (id, password) => {
   });
 };
 
-const checkJwt = (token) => {
-  return request(
+const checkJwt = (token: string) => {
+  return request<UserCheckResponse>(
     "/users/me",
     { populate: "*" },
     {
