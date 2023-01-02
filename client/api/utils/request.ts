@@ -1,10 +1,22 @@
 import qs from "qs";
 
-export const getStrapiURL = (path = "") => {
+export const getStrapiURL = (path: string = "") => {
   return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"}${path}`;
 };
 
-const request = async (path, urlParamsObject = {}, options = {}) => {
+export interface StrapiUrlParamsObject {
+  populate?: string | { [key: string]: any };
+  filters?: { [key: string]: any };
+  sort?: string | Array<string>;
+  fields?: Array<string>;
+  pagination?: { [key: string]: any };
+}
+
+const request = async <T>(
+  path: string,
+  urlParamsObject: StrapiUrlParamsObject = {},
+  options: RequestInit = {}
+): Promise<T> => {
   const mergedOptions = {
     headers: {
       "Content-Type": "application/json",

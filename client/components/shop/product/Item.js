@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import Text from "client/components/common/Text";
-import { getStrapiURL } from "../../lib/request";
+import { getStrapiURL } from "client/api/utils/request";
 
 const ProductItem = ({ data }) => {
-  const { title, description, imageUrl, price, image } = data;
+  const { title, description, imageUrl, price } = data;
 
   return (
     <Card key={title}>
@@ -14,7 +14,7 @@ const ProductItem = ({ data }) => {
         width={300}
         height={300}
         alt={title}
-        src={image.data ? getStrapiURL(image.data.attributes.url) : imageUrl}
+        src={imageUrl.startsWith("/") ? getStrapiURL(imageUrl) : imageUrl}
         style={{ alignSelf: "center" }}
       />
       <CardContent>

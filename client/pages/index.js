@@ -1,29 +1,32 @@
-import request from "client/lib/request";
-import Layout from "client/components/layout/shop";
-import Seo from "client/components/seo";
-import ProductList from "client/components/product/list";
+import API from "client/api";
+import Layout from "client/components/layout/Shop";
+import Seo from "client/components/common/Seo";
+import CategoryTab from "client/components/shop/product/CategoryTab";
+import ProductList from "client/components/shop/product/List";
 
 const Home = ({ products, homepage }) => {
   return (
     <Layout>
       <Seo seo={homepage.attributes.seo} />
-      <ProductList products={products} />
+      {products.isEmpty ? (
+        <>
+          <CategoryTab />
+          <div>물품 없음</div>
+        </>
+      ) : (
+        <ProductList products={products.productList} />
+      )}
     </Layout>
   );
 };
 
 export const getStaticProps = async () => {
-  const { data: products } = await request(`/products?populate=*`);
-  const { data: homepage } = await request(`/home-page`, {
-    populate: {
-      seo: { populate: "*" },
-    },
-  });
-
+  const productsRes = await API.getProductList();
+  const homepageSeo = await API.getPageSeo("/home-page");
   return {
     props: {
-      products,
-      homepage,
+      products: productsRes,
+      homepage: homepageSeo,
     },
   };
 };

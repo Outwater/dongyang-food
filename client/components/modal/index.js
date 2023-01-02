@@ -2,7 +2,7 @@ import React, { useContext, lazy, Suspense } from "react";
 import { ModalDispatchContext, ModalsStateContext } from "client/context/modal";
 
 export const modals = {
-  adminAuth: lazy(() => import("./adminAuth")),
+  adminAuth: lazy(() => import("./AdminAuth")),
 };
 
 const Modals = () => {

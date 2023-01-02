@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import useUser from "../../hooks/useUser";
-import ShopLayout from "./shop";
-import Nav from "../nav";
-import Stack from "./stack";
-import SideBar from "../sidebar";
+import useUser from "client/hooks/useUser";
+import Stack from "./Stack";
+import ShopLayout from "./Shop";
+import { Nav, Sidebar } from "client/components/common";
 
 const Admin = ({ children }) => {
   const { isAdmin } = useUser();
@@ -18,7 +17,7 @@ const Admin = ({ children }) => {
     <BackGround>
       <Nav />
       <Stack addStyle={{ marginTop: "12px" }}>
-        <SideBar />
+        <Sidebar />
         <Contents>{children}</Contents>
       </Stack>
     </BackGround>
@@ -28,14 +27,15 @@ const Admin = ({ children }) => {
 export default Admin;
 
 const BackGround = styled.div({
-  height: "100vh",
+  height: "100%",
   backgroundColor: "rgb(238, 238, 238)",
 });
 
 const Contents = styled.div({
   width: "100%",
-  height: "calc(100vh - 92px)",
+  minHeight: "calc(100vh - 92px)",
   margin: "0 12px",
+  padding: "36px",
 
   backgroundColor: "white",
 });

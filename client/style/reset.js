@@ -33,7 +33,11 @@ export default css`
   table {
     border-collapse: collapse;
   }
-
+  th,
+  td {
+    text-align: start;
+    vertical-align: middle;
+  }
   /* revert the 'white-space' property for textarea elements on Safari */
   textarea {
     white-space: revert;

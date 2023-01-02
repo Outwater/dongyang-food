@@ -1,4 +1,4 @@
-import AdminLayout from "client/components/layout/admin";
+import AdminLayout from "client/components/layout/Admin";
 
 const Admin = () => {
   return (
