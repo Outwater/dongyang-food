@@ -1,21 +1,32 @@
-import { createContext } from "react";
+import { createContext, ReactNode, FunctionComponent } from "react";
 import { useState, useMemo } from "react";
 import Modals from "@/components/modal";
 
-export const ModalsStateContext = createContext([]);
-export const ModalDispatchContext = createContext({
-  open: () => {},
-  close: () => {},
-});
+type ModalState = {
+  Component: FunctionComponent;
+  props: any;
+};
 
-const ModalsProvider = ({ children }) => {
+type ModalAction = {
+  open: (Component: FunctionComponent, props: any) => void;
+  close: (Component: FunctionComponent) => void;
+};
+
+export const ModalsStateContext = createContext<ModalState[]>([]);
+export const ModalDispatchContext = createContext<ModalAction | null>(null);
+
+type Props = {
+  children: ReactNode;
+};
+
+const ModalsProvider = ({ children }: Props) => {
   const [openModals, setOpenModals] = useState([]);
 
-  const open = (Component, props) => {
+  const open = (Component: FunctionComponent, props) => {
     setOpenModals((modals) => [...modals, { Component, props }]);
   };
 
-  const close = (Component) => {
+  const close = (Component: FunctionComponent) => {
     setOpenModals((modals) => modals.filter((modal) => modal.Component !== Component));
   };
 

@@ -1,7 +1,17 @@
 import { createContext, useMemo, useState } from "react";
 
-export const UserStateContext = createContext();
-export const UserDispatchContext = createContext();
+type userState = {
+  userInfo: any;
+  isAdmin: boolean;
+  isLogin: boolean;
+};
+
+type UserAction = {
+  adminLogin: () => void;
+};
+
+export const UserStateContext = createContext<userState | null>(null);
+export const UserDispatchContext = createContext<UserAction | null>(null);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
