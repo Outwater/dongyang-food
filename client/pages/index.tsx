@@ -18,6 +18,7 @@ const Home = ({ products, homepage }: Props) => {
       {products.isEmpty ? (
         <>
           <CategoryTab />
+
           <div>물품 없음</div>
         </>
       ) : (
@@ -30,6 +31,7 @@ const Home = ({ products, homepage }: Props) => {
 export const getStaticProps: GetStaticProps = async () => {
   const productsRes = await API.getProductList();
   const homepageSeo = await API.getPageSeo("/home-page");
+
   return {
     props: {
       products: productsRes,

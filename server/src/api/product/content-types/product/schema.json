@@ -20,10 +20,12 @@
       "type": "string"
     },
     "price": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "category": {
       "type": "relation",
@@ -54,11 +56,13 @@
         "selling",
         "stop",
         "soldout"
-      ]
+      ],
+      "default": "selling"
     },
     "stock": {
       "type": "integer",
-      "default": 0
+      "default": 0,
+      "required": true
     }
   }
 }

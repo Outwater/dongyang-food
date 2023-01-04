@@ -2,16 +2,19 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import API from "@/api";
 import { getStrapiURL } from "@/api/utils/request";
+import useModal from "@/hooks/useModal";
 import { Admin as Layout, Stack } from "@/components/layout";
 import { DataTable, Text, StyledButton } from "@/components/common";
 import CategoryFilter from "@/components/admin/product/CategoryFilter";
 import ProductDataTable from "@/components/admin/product/ProductDataTable";
+import { modals } from "@/components/modal";
 import { TableModel } from "@/lib/table/types";
 import { Product, Products } from "@/types";
 
 const Products = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Products>();
+  const { openModal } = useModal();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -30,7 +33,7 @@ const Products = () => {
       header: { render: () => <div>{"썸네일"}</div> },
       cell: {
         render: ({ cellProps: { value, label } }) => {
-          if (typeof value !== "string") return;
+          if (!value || typeof value !== "string") return;
           return (
             <Image
               width={80}
@@ -102,7 +105,17 @@ const Products = () => {
         </Text>
         <Stack addStyle={{ gap: "12px" }}>
           <StyledButton>판매 목록 인쇄</StyledButton>
-          <StyledButton>상품 추가</StyledButton>
+          <StyledButton
+            onClick={() => {
+              openModal(modals.productRegisterForm, {
+                onSubmit: async (data, token) => {
+                  await API.createProduct(data, token);
+                  console.log("상품을 등록합니다.");
+                },
+              });
+            }}>
+            상품 추가
+          </StyledButton>
         </Stack>
       </Stack>
       <Stack direction="column" addStyle={{ marginTop: "40px", gap: "20px" }}>

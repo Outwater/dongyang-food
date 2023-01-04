@@ -3,6 +3,7 @@ import { ModalDispatchContext, ModalsStateContext } from "@/context/modal";
 
 export const modals = {
   adminAuth: lazy(() => import("./AdminAuth")),
+  productRegisterForm: lazy(() => import("./ProductRegisterForm")),
 };
 
 const Modals = () => {

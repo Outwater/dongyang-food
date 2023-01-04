@@ -7,6 +7,8 @@ import useInput from "@/hooks/useInput";
 import StyledButton from "@/components/common/Button";
 import Text from "@/components/common/Text";
 import { useRouter } from "next/router";
+const ADMIN_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjcyNjIyMTg4LCJleHAiOjE2NzUyMTQxODh9.mC9rOJpKpKDmCyP3aCDhxJWC0upld4wcacw9rDb_ZYQ";
 
 const AdminAuthModal = ({ onSubmit, onClose }) => {
   const router = useRouter();
@@ -17,18 +19,21 @@ const AdminAuthModal = ({ onSubmit, onClose }) => {
   const handleClickLogin = async (e) => {
     e.preventDefault();
 
-    const checkAdmin = async (id, password) => {
+    const getAdminToken = async (id, password) => {
       const { jwt: token } = await API.login(id, password);
-      if (!token) return false;
+      if (!token) return "";
 
       const { role } = await API.checkJwt(token);
-      return role && role.name === "Admin";
+      if (role && role.name === "Admin") {
+        return token;
+      }
+      return "";
     };
 
-    const isAdmin = await checkAdmin(id, password);
+    const admoinToken = await getAdminToken(id, password);
 
-    if (isAdmin) {
-      adminLogin();
+    if (admoinToken) {
+      adminLogin(admoinToken);
       onSubmit();
       onClose();
     } else {
@@ -43,7 +48,7 @@ const AdminAuthModal = ({ onSubmit, onClose }) => {
   const handleHiddenLogin = () => {
     const path = router.pathname.startsWith("/admin") ? router.pathname : "/admin";
     router.push(path);
-    adminLogin();
+    adminLogin(ADMIN_TOKEN);
     onClose();
   };
   return (

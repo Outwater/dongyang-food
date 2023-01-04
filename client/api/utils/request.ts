@@ -20,6 +20,7 @@ const request = async <T>(
   const mergedOptions = {
     headers: {
       "Content-Type": "application/json",
+      ...options.headers,
     },
     ...options,
   };

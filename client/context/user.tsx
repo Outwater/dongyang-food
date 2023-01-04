@@ -1,30 +1,32 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, ReactNode, useMemo, useState } from "react";
 
-type userState = {
-  userInfo: any;
+type UserState = {
+  token: string;
   isAdmin: boolean;
-  isLogin: boolean;
 };
 
 type UserAction = {
-  adminLogin: () => void;
+  adminLogin: (token: string) => void;
 };
 
-export const UserStateContext = createContext<userState | null>(null);
+export const UserStateContext = createContext<UserState | null>(null);
 export const UserDispatchContext = createContext<UserAction | null>(null);
 
-const UserProvider = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const UserProvider = ({ children }: Props) => {
   const [user, setUser] = useState({
-    userInfo: {},
+    token: "",
     isAdmin: false,
-    isLogin: false,
   });
 
-  const adminLogin = () => {
-    setUser((prev) => ({
-      ...prev,
+  const adminLogin = (token: string) => {
+    setUser({
+      token,
       isAdmin: true,
-    }));
+    });
   };
 
   const dispatch = useMemo(() => ({ adminLogin }), []);

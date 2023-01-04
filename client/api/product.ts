@@ -1,8 +1,8 @@
-import { CategoryAttribute, StrapiListResponse } from "@/types";
+import { CategoryAttribute, ProductAttribute, StrapiListResponse } from "@/types";
 import request, { StrapiUrlParamsObject } from "./utils/request";
 import { decodeProductList } from "./utils/decode";
 
-export const getProductList = async (
+const getProductList = async (
   urlParamsOptions: StrapiUrlParamsObject = { populate: "*" },
   options: RequestInit = {}
 ) => {
@@ -10,7 +10,7 @@ export const getProductList = async (
   return response;
 };
 
-export const getCategoryList = async (
+const getCategoryList = async (
   urlParamsOptions: StrapiUrlParamsObject = { populate: "*" },
   options: RequestInit = {}
 ) => {
@@ -22,7 +22,25 @@ export const getCategoryList = async (
   return response.data;
 };
 
+const createProduct = async (
+  data: ProductAttribute,
+  token: string,
+  urlParamsOptions: StrapiUrlParamsObject = { populate: "*" },
+  options: RequestInit = {}
+) => {
+  await request("/products", urlParamsOptions, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "POST",
+    body: JSON.stringify({ data }),
+    ...options,
+  });
+};
+
 export default {
   getProductList,
   getCategoryList,
+  createProduct,
 };

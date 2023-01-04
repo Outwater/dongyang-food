@@ -19,6 +19,7 @@
       "@/api": ["api/index"],
       "@/api/*": ["api/*"],
       "@/components/*": ["components/*"],
+      "@/components/modal": ["components/modal/index"],
       "@/context/*": ["context/*"],
       "@/hooks/*": ["hooks/*"],
       "@/utils/*": ["utils/*"],

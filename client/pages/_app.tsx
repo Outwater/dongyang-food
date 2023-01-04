@@ -14,9 +14,7 @@ import UserProvider from "@/context/user";
 import ModalsProvider from "@/context/modal";
 import { StrapiGlobalSeo } from "@/types";
 config.autoAddCss = false;
-/*
- strapi로 부터 받아온 Global object를 저장한다.
-*/
+
 export const GlobalContext = createContext<StrapiGlobalSeo>(null);
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
