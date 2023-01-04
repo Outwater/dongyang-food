@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { FunctionComponent, useContext } from "react";
 import { ModalDispatchContext } from "../context/modal";
 
 export default function useModal() {
   const { open, close } = useContext(ModalDispatchContext);
 
-  const openModal = (Component, props) => {
+  const openModal = (Component: FunctionComponent, props: any) => {
     open(Component, props);
   };
 
-  const closeModal = (Component) => {
+  const closeModal = (Component: FunctionComponent) => {
     close(Component);
   };
 
