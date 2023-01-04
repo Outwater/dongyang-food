@@ -1,6 +1,11 @@
 import { Nav } from "@/components/common";
+import { ReactNode } from "react";
 
-const Shop = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const Shop = ({ children }: Props) => {
   return (
     <>
       <Nav />

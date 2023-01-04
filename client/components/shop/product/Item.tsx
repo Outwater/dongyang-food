@@ -4,8 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import Text from "@/components/common/Text";
 import { getStrapiURL } from "@/api/utils/request";
+import { Product } from "@/types";
 
-const ProductItem = ({ data }) => {
+interface Props {
+  data: Product;
+}
+
+const ProductItem = ({ data }: Props) => {
   const { title, description, imageUrl, price } = data;
 
   return (

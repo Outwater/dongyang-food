@@ -33,10 +33,10 @@ const Container = styled.ul({
 
   display: "flex",
   justifyContent: "center",
-  flexWrap: " wrap",
+  flexWrap: "wrap",
   gap: "15px",
 });
-const TabItem = styled.li(
+const TabItem = styled.li<{ selected: boolean }>(
   {
     width: "180px",
     margin: "0",

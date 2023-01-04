@@ -1,4 +1,12 @@
-const Button = ({ children, size = "normal", addStyle, ...props }) => {
+import { ReactNode } from "react";
+
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  size?: "small" | "normal";
+  addStyle?: React.CSSProperties;
+}
+
+const Button = ({ children, size = "normal", addStyle, ...props }: Props) => {
   const sizeMaps = {
     small: {
       height: "36px",
@@ -30,7 +38,7 @@ const Button = ({ children, size = "normal", addStyle, ...props }) => {
   };
 
   return (
-    <button css={{ ...buttonStyle }} {...props}>
+    <button style={{ ...buttonStyle }} {...props}>
       {children}
     </button>
   );

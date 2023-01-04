@@ -61,7 +61,7 @@ const SidebarList = styled.div({
   gap: "15px",
 });
 
-const SidebarItem = styled.a(
+const SidebarItem = styled.a<{ active: boolean; mobile?: boolean }>(
   {
     display: "inline-block",
     width: "auto",

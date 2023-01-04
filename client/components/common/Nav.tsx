@@ -128,7 +128,7 @@ const NavList = styled.div`
   gap: 15px;
 `;
 
-const NavItem = styled.a(
+const NavItem = styled.a<{ isLast?: boolean; mobile?: boolean }>(
   {
     display: "inline-block",
     width: "auto",
@@ -174,7 +174,7 @@ const MenuButton = styled.div({
   cursor: "pointer",
 });
 
-const MobileNavList = styled.div(
+const MobileNavList = styled.div<{ isOpen: boolean }>(
   {
     position: "relative",
     backgroundColor: "white",
