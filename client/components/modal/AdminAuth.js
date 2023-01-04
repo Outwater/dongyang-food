@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import styled from "@emotion/styled";
 import ReactModal from "react-modal";
-import API from "client/api";
-import { UserDispatchContext } from "client/context/user";
-import useInput from "client/hooks/useInput";
-import StyledButton from "client/components/common/Button";
-import Text from "client/components/common/Text";
+import API from "@/api";
+import { UserDispatchContext } from "@/context/user";
+import useInput from "@/hooks/useInput";
+import StyledButton from "@/components/common/Button";
+import Text from "@/components/common/Text";
 import { useRouter } from "next/router";
 
 const AdminAuthModal = ({ onSubmit, onClose }) => {

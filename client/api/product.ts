@@ -1,4 +1,4 @@
-import { CategoryAttribute, StrapiListResponse } from "client/types";
+import { CategoryAttribute, StrapiListResponse } from "@/types";
 import request, { StrapiUrlParamsObject } from "./utils/request";
 import { decodeProductList } from "./utils/decode";
 

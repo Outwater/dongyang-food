@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { useState, useMemo } from "react";
-import Modals from "client/components/modal";
+import Modals from "@/components/modal";
 
 export const ModalsStateContext = createContext([]);
 export const ModalDispatchContext = createContext({

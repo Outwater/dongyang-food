@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import useUser from "client/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import Stack from "./Stack";
 import ShopLayout from "./Shop";
-import { Nav, Sidebar } from "client/components/common";
+import { Nav, Sidebar } from "@/components/common";
 
 const Admin = ({ children }) => {
   const { isAdmin } = useUser();

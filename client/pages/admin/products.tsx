@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import API from "client/api";
-import { getStrapiURL } from "client/api/utils/request";
-import { Admin as Layout, Stack } from "client/components/layout";
-import { DataTable, Text, StyledButton } from "client/components/common";
-import CategoryFilter from "client/components/admin/product/CategoryFilter";
-import ProductDataTable from "client/components/admin/product/ProductDataTable";
-import { TableModel } from "client/lib/table/types";
-import { Product, Products } from "client/types";
+import API from "@/api";
+import { getStrapiURL } from "@/api/utils/request";
+import { Admin as Layout, Stack } from "@/components/layout";
+import { DataTable, Text, StyledButton } from "@/components/common";
+import CategoryFilter from "@/components/admin/product/CategoryFilter";
+import ProductDataTable from "@/components/admin/product/ProductDataTable";
+import { TableModel } from "@/lib/table/types";
+import { Product, Products } from "@/types";
 
 const Products = () => {
   const [loading, setLoading] = useState(true);

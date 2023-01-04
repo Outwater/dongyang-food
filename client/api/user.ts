@@ -1,4 +1,4 @@
-import { LoginResponse, UserCheckResponse } from "client/types";
+import { LoginResponse, UserCheckResponse } from "@/types";
 import request from "./utils/request";
 
 const login = (id: string, password: string) => {

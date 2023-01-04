@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import CategoryTab from "./CategoryTab";
 import ProductItem from "./Item";
-import { media } from "client/utils/media";
+import { media } from "@/utils/media";
 
 const ProductList = ({ products }) => {
   return (

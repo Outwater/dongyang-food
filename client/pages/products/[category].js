@@ -1,7 +1,7 @@
-import API from "client/api";
-import Layout from "client/components/layout/Shop";
-import CategoryTab from "client/components/shop/product/CategoryTab";
-import ProductList from "client/components/shop/product/List";
+import API from "@/api";
+import Layout from "@/components/layout/Shop";
+import CategoryTab from "@/components/shop/product/CategoryTab";
+import ProductList from "@/components/shop/product/List";
 
 const Category = ({ products }) => {
   return (

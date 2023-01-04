@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserStateContext } from "client/context/user";
+import { UserStateContext } from "@/context/user";
 
 export default function useUser() {
   const user = useContext(UserStateContext);

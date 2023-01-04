@@ -1,4 +1,4 @@
-import { StrapiGlobalSeo, StrapiPageSeo, StrapiResponse } from "client/types/strapi";
+import { StrapiGlobalSeo, StrapiPageSeo, StrapiResponse } from "@/types/strapi";
 import request, { StrapiUrlParamsObject } from "./utils/request";
 
 const getGlobalSeo = async (options: RequestInit) => {

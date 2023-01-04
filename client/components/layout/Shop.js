@@ -1,4 +1,4 @@
-import { Nav } from "client/components/common";
+import { Nav } from "@/components/common";
 
 const Shop = ({ children }) => {
   return (

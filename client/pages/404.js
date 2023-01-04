@@ -1,5 +1,5 @@
-import Text from "client/components/common/Text";
-import Layout from "client/components/layout/Shop";
+import Text from "@/components/common/Text";
+import Layout from "@/components/layout/Shop";
 
 const NotFoundPage = ({}) => {
   return (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 
-import { media } from "client/utils/media";
+import { media } from "@/utils/media";
 
 const sidebarItems = [
   { path: "/admin/products", label: "상품 관리" },
