@@ -1,4 +1,5 @@
 import App from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import { createContext } from "react";
 import { Global } from "@emotion/react";
@@ -17,7 +18,7 @@ config.autoAddCss = false;
 */
 export const GlobalContext = createContext({});
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const { global } = pageProps;
   return (
     <>
