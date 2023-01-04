@@ -1,9 +1,15 @@
-import API from "client/api";
-import Layout from "client/components/layout/Shop";
-import CategoryTab from "client/components/shop/product/CategoryTab";
-import ProductList from "client/components/shop/product/List";
+import { GetStaticPaths, GetStaticProps } from "next";
+import API from "@/api";
+import Layout from "@/components/layout/Shop";
+import CategoryTab from "@/components/shop/product/CategoryTab";
+import ProductList from "@/components/shop/product/List";
+import { Products } from "@/types";
 
-const Category = ({ products }) => {
+interface Props {
+  products: Products;
+}
+
+const Category = ({ products }: Props) => {
   return (
     <Layout>
       {products.isEmpty ? (
@@ -18,7 +24,7 @@ const Category = ({ products }) => {
   );
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const categoriesRes = await API.getCategoryList({ fields: ["name", "code"] });
   const categroyPaths = categoriesRes.map((category) => ({
     params: {
@@ -33,7 +39,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (params.category === "all") {
     const productsRes = await API.getProductList();
 

@@ -2,10 +2,15 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import Text from "client/components/common/Text";
-import { getStrapiURL } from "client/api/utils/request";
+import Text from "@/components/common/Text";
+import { getStrapiURL } from "@/api/utils/request";
+import { Product } from "@/types";
 
-const ProductItem = ({ data }) => {
+interface Props {
+  data: Product;
+}
+
+const ProductItem = ({ data }: Props) => {
   const { title, description, imageUrl, price } = data;
 
   return (

@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
-import useUser from "client/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import Stack from "./Stack";
 import ShopLayout from "./Shop";
-import { Nav, Sidebar } from "client/components/common";
+import { Nav, Sidebar } from "@/components/common";
+import { ReactNode } from "react";
 
-const Admin = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const Admin = ({ children }: Props) => {
   const { isAdmin } = useUser();
   if (!isAdmin)
     return (

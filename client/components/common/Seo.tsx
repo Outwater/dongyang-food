@@ -1,9 +1,14 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { getStrapiURL } from "client/api/utils/request";
-import { GlobalContext } from "client/pages/_app";
+import { getStrapiURL } from "@/api/utils/request";
+import { GlobalContext } from "@/pages/_app";
+import { StrapiSeo } from "@/types";
 
-const Seo = ({ seo }) => {
+interface Props {
+  seo: StrapiSeo;
+}
+
+const Seo = ({ seo }: Props) => {
   const { defaultSeo, SiteName } = useContext(GlobalContext);
   const seoWithDefaults = {
     ...defaultSeo,

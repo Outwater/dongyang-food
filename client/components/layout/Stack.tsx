@@ -1,7 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "@emotion/styled";
 
-const Stack = ({ children, direction = "row", gap, ...props }) => {
+interface Props {
+  children: ReactNode;
+  direction?: "row" | "row-reverse" | "column" | "column-reverse";
+  gap?: number;
+  addStyle?: React.CSSProperties;
+}
+
+const Stack = ({ children, direction = "row", gap, ...props }: Props) => {
   const styleObject = {
     display: "flex",
     flexDirection: direction,

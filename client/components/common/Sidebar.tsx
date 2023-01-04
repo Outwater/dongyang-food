@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 
-import { media } from "client/utils/media";
+import { media } from "@/utils/media";
 
 const sidebarItems = [
   { path: "/admin/products", label: "상품 관리" },
@@ -61,7 +61,7 @@ const SidebarList = styled.div({
   gap: "15px",
 });
 
-const SidebarItem = styled.a(
+const SidebarItem = styled.a<{ active: boolean; mobile?: boolean }>(
   {
     display: "inline-block",
     width: "auto",

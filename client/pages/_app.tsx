@@ -1,22 +1,25 @@
 import App from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import { createContext } from "react";
-import API from "client/api";
-import { getStrapiURL } from "client/api/utils/request";
 import { Global } from "@emotion/react";
-import reset from "client/style/reset";
-import globalStyle from "client/style/global";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import ModalsProvider from "client/context/modal";
-import UserProvider from "client/context/user";
+
+import API from "@/api";
+import { getStrapiURL } from "@/api/utils/request";
+import reset from "@/style/reset";
+import globalStyle from "@/style/global";
+import UserProvider from "@/context/user";
+import ModalsProvider from "@/context/modal";
+import { StrapiGlobalSeo } from "@/types";
 config.autoAddCss = false;
 /*
  strapi로 부터 받아온 Global object를 저장한다.
 */
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext<StrapiGlobalSeo>(null);
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const { global } = pageProps;
   return (
     <>

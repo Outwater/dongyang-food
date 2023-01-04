@@ -1,4 +1,4 @@
-import { Product, ProductAttribute } from "client/types/product";
+import { Product, ProductAttribute } from "@/types/product";
 import { StrapiListResponse } from "../../types/strapi";
 
 export const decodeProductList = (init: StrapiListResponse<ProductAttribute>) => ({

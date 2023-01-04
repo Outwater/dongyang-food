@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import qs from "qs";
-import useDataTable from "client/lib/table/index";
-import { TableModel } from "client/lib/table/types";
+import useDataTable from "@/lib/table/index";
+import { TableModel } from "@/lib/table/types";
 
 interface DataTableProps<Row> {
   dataSource: Row[];

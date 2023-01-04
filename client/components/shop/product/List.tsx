@@ -2,9 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import CategoryTab from "./CategoryTab";
 import ProductItem from "./Item";
-import { media } from "client/utils/media";
+import { media } from "@/utils/media";
+import { Product } from "@/types";
 
-const ProductList = ({ products }) => {
+interface Props {
+  products: Product[];
+}
+const ProductList = ({ products }: Props) => {
   return (
     <>
       <CategoryTab />
