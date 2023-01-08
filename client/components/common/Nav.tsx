@@ -7,7 +7,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import useUser from "@/hooks/useUser";
 import useModal from "@/hooks/useModal";
 import { media } from "@/utils/media";
-import { modals } from "../modal/index";
+import { modals } from "@/components/modal";
 
 const navItems = [
   { path: "/products/all", label: "상품 목록" },
