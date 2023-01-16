@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_sections_sections_heroes",
+  "info": {
+    "displayName": "Sections.hero",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

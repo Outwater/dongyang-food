@@ -25,10 +25,6 @@
     "description": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -40,6 +36,29 @@
       "relation": "manyToOne",
       "target": "api::sub-category.sub-category",
       "inversedBy": "products"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "selling",
+        "stop",
+        "soldout"
+      ]
+    },
+    "stock": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
